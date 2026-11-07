@@ -1,0 +1,90 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Create News Article')
+@section('page_title', 'Create News or Event Announcement')
+
+@section('content')
+
+    <div class="mb-4">
+        <a href="{{ route('admin.news.index') }}" class="btn btn-sm btn-outline-secondary">
+            <i class="fa-solid fa-arrow-left me-1"></i> Back to News List
+        </a>
+    </div>
+
+    <div class="admin-card">
+        <div class="admin-card-header">
+            <h5 class="admin-card-title">New Story / Event Details</h5>
+        </div>
+        <div class="admin-card-body p-4">
+            <form action="{{ route('admin.news.store') }}" method="POST">
+                @csrf
+
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <label for="title" class="form-label fw-bold text-navy">Article Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" placeholder="e.g. SDC Provides Clean Drinking Water Facilities to 500 Families" required>
+                        @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="type" class="form-label fw-bold text-navy">Post Type <span class="text-danger">*</span></label>
+                        <select class="form-select @error('type') is-invalid @enderror" id="type" name="type" required>
+                            <option value="news" {{ old('type') == 'news' ? 'selected' : '' }}>News / Field Story</option>
+                            <option value="event" {{ old('type') == 'event' ? 'selected' : '' }}>Upcoming Event / Seminar</option>
+                        </select>
+                        @error('type') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="location" class="form-label fw-bold text-navy">Location (Optional)</label>
+                        <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" value="{{ old('location') }}" placeholder="e.g. Ampara District, Sri Lanka">
+                        @error('location') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="image" class="form-label fw-bold text-navy">Featured Image URL</label>
+                        <input type="url" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image') }}" placeholder="https://images.unsplash.com/...">
+                        <div class="form-text small">Enter image URL or high-resolution photo link.</div>
+                        @error('image') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="col-12">
+                        <label for="summary" class="form-label fw-bold text-navy">Short Summary / Teaser</label>
+                        <textarea class="form-control @error('summary') is-invalid @enderror" id="summary" name="summary" rows="2" placeholder="Brief 1-2 sentence lead paragraph that appears in feeds and previews...">{{ old('summary') }}</textarea>
+                        @error('summary') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="col-12">
+                        <label for="content" class="form-label fw-bold text-navy">Full Article Content <span class="text-danger">*</span></label>
+                        <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="10" placeholder="Write full article content, beneficiary testimonials, impact metrics, project milestones..." required>{{ old('content') }}</textarea>
+                        @error('content') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="published_at" class="form-label fw-bold text-navy">Publication Date</label>
+                        <input type="date" class="form-control @error('published_at') is-invalid @enderror" id="published_at" name="published_at" value="{{ old('published_at', date('Y-m-d')) }}">
+                        @error('published_at') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    </div>
+
+                    <div class="col-md-6 d-flex align-items-center mt-md-4">
+                        <div class="form-check form-switch pt-2">
+                            <input class="form-check-input" type="checkbox" role="switch" id="is_published" name="is_published" value="1" {{ old('is_published', '1') ? 'checked' : '' }}>
+                            <label class="form-check-label fw-bold text-navy ms-2" for="is_published">
+                                Publish to Website immediately
+                            </label>
+                            <div class="text-muted small">If unchecked, this article will remain a private draft hidden from public visitors.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-top text-end">
+                    <a href="{{ route('admin.news.index') }}" class="btn btn-outline-secondary me-2">Cancel</a>
+                    <button type="submit" class="btn btn-teal px-4">
+                        <i class="fa-solid fa-floppy-disk me-1"></i> Save & Publish Article
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+@endsection

@@ -1,24 +1,96 @@
-*.log
-.DS_Store
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
-/.fleet
-/.idea
-/.nova
-/.phpunit.cache
-/.vscode
-/.zed
-/auth.json
+# ==========================================
+# Laravel Framework & Core
+# ==========================================
+/vendor
 /node_modules
 /public/build
 /public/hot
 /public/storage
 /storage/*.key
 /storage/pail
-/vendor
+/storage/debugbar
+/storage/clockwork
+*.log
+
+# ==========================================
+# Environment & Sensitive Configs
+# ==========================================
+.env
+.env.backup
+.env.local
+.env.*.local
+.env.production
+.env.staging
+.env.stage
+.env.testing
+/auth.json
+
+# ==========================================
+# Databases & Local Backups
+# (charities.sql remains tracked)
+# ==========================================
+/database/*.sqlite
+/database/*.sqlite-journal
+*.sql.gz
+*.dump
+backup.sql
+dump.sql
+
+# ==========================================
+# Testing & Code Coverage
+# ==========================================
+.phpunit.result.cache
+/.phpunit.cache
+/.pest
+/coverage
+
+# ==========================================
+# Package Managers & Build Tools
+# ==========================================
+composer.phar
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vite/
+.turbo/
+
+# ==========================================
+# IDEs, Code Editors & Workspaces
+# ==========================================
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+.phpactor.json
+*.sublime-workspace
+*.sublime-project
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 Homestead.json
 Homestead.yaml
+
+# ==========================================
+# AI Agents & Local Assistants
+# ==========================================
+/.agents
+/.gemini
+/.antigravity
+
+# ==========================================
+# Operating System Files (Windows & macOS)
+# ==========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
